@@ -1,24 +1,24 @@
-"use strict";
+'use strict';
 
-import * as sound from "./sound.js";
+import * as sound from './sound.js';
 
 const CARROT_SIZE = 80;
-const CARROT_IMG_PATH = "../img/carrot.png";
-const BUG_IMG_PATH = "../img/bug.png";
+const CARROT_IMG_PATH = '../imgs/carrot.png';
+const BUG_IMG_PATH = '../imgs/bug.png';
 
 export default class Field {
   constructor(carrotCount, bugCount) {
     this.carrotCount = carrotCount;
     this.bugCount = bugCount;
-    this.gameField = document.querySelector(".game__field");
+    this.gameField = document.querySelector('.game__field');
     this.fieldRect = this.gameField.getBoundingClientRect();
-    this.gameField.addEventListener("click", this.onClick);
+    this.gameField.addEventListener('click', this.onClick);
   }
 
   init() {
-    this.gameField.innerHTML = "";
-    this._addItem("carrot", this.carrotCount, CARROT_IMG_PATH);
-    this._addItem("bug", this.bugCount, BUG_IMG_PATH);
+    this.gameField.innerHTML = '';
+    this._addItem('carrot', this.carrotCount, CARROT_IMG_PATH);
+    this._addItem('bug', this.bugCount, BUG_IMG_PATH);
   }
 
   setClickListener(onItemClick) {
@@ -33,12 +33,12 @@ export default class Field {
 
     // 이미지 생성
     for (let i = 0; i < count; i++) {
-      const item = document.createElement("img");
-      item.setAttribute("class", className);
-      item.setAttribute("src", imgPath);
+      const item = document.createElement('img');
+      item.setAttribute('class', className);
+      item.setAttribute('src', imgPath);
 
       // 위치 적용
-      item.style.position = "absolute";
+      item.style.position = 'absolute';
       const x = randomNumber(x1, x2);
       const y = randomNumber(y1, y2);
       item.style.left = `${x}px`;
@@ -50,12 +50,12 @@ export default class Field {
 
   onClick = (event) => {
     const target = event.target;
-    if (target.matches(".carrot")) {
+    if (target.matches('.carrot')) {
       target.remove();
       sound.playCarrot();
-      this.onItemClick && this.onItemClick("carrot");
-    } else if (target.matches(".bug")) {
-      this.onItemClick && this.onItemClick("bug");
+      this.onItemClick && this.onItemClick('carrot');
+    } else if (target.matches('.bug')) {
+      this.onItemClick && this.onItemClick('bug');
     }
   };
 }

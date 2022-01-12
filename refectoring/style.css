@@ -12,7 +12,7 @@ button {
 .game {
   display: flex;
   flex-direction: column;
-  background: url(../img/background.png) center/cover;
+  background: url(../imgs/background.png) center/cover;
   width: 800px;
   height: 500px;
   border-radius: 20px;
@@ -112,4 +112,5 @@ button {
 .carrot:hover,
 .bug:hover {
   transform: scale(1.1);
+  cursor: pointer;
 }

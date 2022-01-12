@@ -1,33 +1,33 @@
-"use strict";
+'use strict';
 
 const CARROT_SIZE = 80;
 const CARROT_COUNT = 3;
 const BUG_COUNT = 3;
 const GAME_DURATION_SEC = 5;
 
-const field = document.querySelector(".game__field");
+const field = document.querySelector('.game__field');
 const fieldRect = field.getBoundingClientRect();
-const gameBtn = document.querySelector(".game__button");
-const gameTimer = document.querySelector(".game__timer");
-const gameScore = document.querySelector(".game__score");
+const gameBtn = document.querySelector('.game__button');
+const gameTimer = document.querySelector('.game__timer');
+const gameScore = document.querySelector('.game__score');
 
-const popUp = document.querySelector(".pop-up");
-const popUpMessage = document.querySelector(".pop-up__message");
-const popUpRefresh = document.querySelector(".pop-up__refresh");
+const popUp = document.querySelector('.pop-up');
+const popUpMessage = document.querySelector('.pop-up__message');
+const popUpRefresh = document.querySelector('.pop-up__refresh');
 
-const carrotSound = new Audio("../sound/carrot_pull.mp3");
-const alertSound = new Audio("../sound/alert.wav");
-const bgSound = new Audio("../sound/bg.mp3");
-const bugSound = new Audio("../sound/bug_pull.mp3");
-const winSound = new Audio("../sound/game_win.mp3");
+const carrotSound = new Audio('sound/carrot_pull.mp3');
+const alertSound = new Audio('sound/alert.wav');
+const bgSound = new Audio('sound/bg.mp3');
+const bugSound = new Audio('sound/bug_pull.mp3');
+const winSound = new Audio('sound/game_win.mp3');
 
 let started = false;
 let timer = undefined;
 let score = 0;
 
-field.addEventListener("click", onFieldClick);
+field.addEventListener('click', onFieldClick);
 
-gameBtn.addEventListener("click", () => {
+gameBtn.addEventListener('click', () => {
   if (started) {
     stopGame();
   } else {
@@ -35,7 +35,7 @@ gameBtn.addEventListener("click", () => {
   }
 });
 
-popUpRefresh.addEventListener("click", () => {
+popUpRefresh.addEventListener('click', () => {
   startGame();
   hidePopUp();
 });
@@ -53,7 +53,7 @@ function stopGame() {
   started = false;
   stopGameTimer();
   hideGameButton();
-  showPopUpWithText("REPLAY?🙄");
+  showPopUpWithText('REPLAY?🙄');
   playSound(alertSound);
   stopSound(bgSound);
 }
@@ -68,16 +68,16 @@ function finishGame(win) {
   }
   stopGameTimer();
   stopSound(bgSound);
-  showPopUpWithText(win ? "YOU WON~!👍" : "YOU LOST🤢");
+  showPopUpWithText(win ? 'YOU WON~!👍' : 'YOU LOST🤢');
 }
 
 function initGame() {
   gameScore.innerHTML = CARROT_COUNT;
   score = 0;
-  field.innerHTML = "";
+  field.innerHTML = '';
 
-  addItem("carrot", CARROT_COUNT, "../img/carrot.png");
-  addItem("bug", BUG_COUNT, "../img/bug.png");
+  addItem('carrot', CARROT_COUNT, 'imgs/carrot.png');
+  addItem('bug', BUG_COUNT, 'imgs/bug.png');
 }
 
 function addItem(className, count, imgPath) {
@@ -90,11 +90,11 @@ function addItem(className, count, imgPath) {
 
   for (let i = 0; i < count; i++) {
     // 이미지를 생성
-    const item = document.createElement("img");
-    item.setAttribute("class", className);
-    item.setAttribute("src", imgPath);
+    const item = document.createElement('img');
+    item.setAttribute('class', className);
+    item.setAttribute('src', imgPath);
 
-    item.style.position = "absolute";
+    item.style.position = 'absolute';
     const x = randomNumber(x1, x2);
     const y = randomNumber(y1, y2);
 
@@ -110,14 +110,14 @@ function randomNumber(min, max) {
 }
 
 function showStopButton() {
-  const icon = gameBtn.querySelector(".fas");
-  icon.classList.remove("fa-play");
-  icon.classList.add("fa-stop");
+  const icon = gameBtn.querySelector('.fas');
+  icon.classList.remove('fa-play');
+  icon.classList.add('fa-stop');
 }
 
 function showTimerAndScore() {
-  gameTimer.style.visibility = "visible";
-  gameScore.style.visibility = "visible";
+  gameTimer.style.visibility = 'visible';
+  gameScore.style.visibility = 'visible';
 }
 
 function startGameTimer() {
@@ -130,7 +130,7 @@ function startGameTimer() {
       finishGame(CARROT_COUNT === score);
       return;
     }
-    if (gameScore.outerText === "0") {
+    if (gameScore.outerText === '0') {
       clearInterval(timer);
       return;
     }
@@ -145,7 +145,7 @@ function updateTimerText(time) {
 }
 
 function hideGameButton() {
-  gameBtn.style.visibility = "hidden";
+  gameBtn.style.visibility = 'hidden';
 }
 
 function onFieldClick(event) {
@@ -154,7 +154,7 @@ function onFieldClick(event) {
   }
 
   const target = event.target;
-  if (target.matches(".carrot")) {
+  if (target.matches('.carrot')) {
     target.remove();
     score++;
     playSound(carrotSound);
@@ -163,7 +163,7 @@ function onFieldClick(event) {
     if (score === CARROT_COUNT) {
       finishGame(true);
     }
-  } else if (target.matches(".bug")) {
+  } else if (target.matches('.bug')) {
     finishGame(false);
   }
 }
@@ -174,11 +174,11 @@ function stopGameTimer() {
 
 function showPopUpWithText(text) {
   popUpMessage.innerHTML = text;
-  popUp.classList.remove("pop-up--hide");
+  popUp.classList.remove('pop-up--hide');
 }
 
 function hidePopUp() {
-  popUp.classList.add("pop-up--hide");
+  popUp.classList.add('pop-up--hide');
 }
 
 function updateScoreBoard() {
