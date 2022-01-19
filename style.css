@@ -14,7 +14,7 @@ button {
   flex-direction: column;
   width: 800px;
   height: 500px;
-  background: url(imgs/background.png) center/cover;
+  background: url('imgs/background.png') center/cover;
   margin: auto;
   border-radius: 20px;
 }
